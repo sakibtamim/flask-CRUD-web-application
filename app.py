@@ -43,6 +43,20 @@ def insert():
         flash("Employee inserted successfully")
 
         return redirect(url_for('index'))
+@app.route('/update', methods = ['GET', 'POST'])
+def update():
+    if request.method == 'POST':
+        my_data = Data.query.get(request.form.get('id'))
+
+        my_data.name = request.form['name']
+        my_data.email = request.form['email']
+        my_data.phone = request.form['phone']
+
+        db.session.commit()
+        flash("Employee updated successfully")
+
+        return redirect(url_for('index'))
+
 
 
 if __name__ == '__main__':
